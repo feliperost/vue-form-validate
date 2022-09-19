@@ -1,35 +1,37 @@
 <template>
   <div id="form-wrapper">
 
-    <Form class="form" @submit="onSubmit">
-      <label for="email">E-mail:</label>
-      <Field class="field" name="email" type="email" :rules="validateEmail" placeholder="seu_email@email.com"/>
-      <ErrorMessage class="error-msg" name="email" />
-    </Form>
+    <h2>Formulário com validação e input mask.</h2>
+    <p>Campos marcados com * são obrigatórios.</p>
 
     <Form class="form" @submit="onSubmit">
-      <label for="name">Nome completo:</label>
+      <label for="name">Nome*:</label>
       <Field class="field" name="name" type="text" :rules="validateName" placeholder="Nome Completo"/>
-      <ErrorMessage class="error-msg" name="name" />
-    </Form>
+      <ErrorMessage class="error-msg" name="name" /><br>
 
-    <Form class="form" @submit="onSubmit">
-      <label for="cpf">CPF ou CNPJ:</label>
+      <label for="email">E-mail*:</label>
+      <Field class="field" name="email" type="email" :rules="validateEmail" placeholder="email@email.com"/>
+      <ErrorMessage class="error-msg" name="email" /><br>
+    
+      <label for="cpf">CPF ou CNPJ*:</label>
       <Field class="field" name="cpf" type="text" :rules="validateCPF" v-mask="['###.###.###-##', '##.###.###/####-##']" placeholder="000.000.000-00"/>
-      <ErrorMessage class="error-msg" name="cpf" />
+      <ErrorMessage class="error-msg" name="cpf" /><br>
+    
+      <label for="telefone">Telefone*:</label>
+      <Field class="field" name="telefone" type="text" :rules="validateTel" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="(00) 0 0000-0000"/>
+      <ErrorMessage class="error-msg" name="telefone" /><br>
+
+      <button class="btn-padrao" @click="onSubmit()">Enviar</button>
     </Form>
 
-    <button class="btn-padrao" @click="onSubmit()">Enviar</button>
-    <!-- :mask="['###.###.###-##', '##.###.###/####-##']"
-    v-mask="'##/##/####'" placeholder="DD/MM/AAAA" -->
-
+    <div v-if="dadosForm">{{dadosForm}}</div>
+    <div v-else>{{mensagemErro}}</div>
   </div>
 </template>
 
 
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate';
-
 
 export default {
   components: {
@@ -39,19 +41,20 @@ export default {
   },
   data() {
     return {
-
+      dadosForm: {},
+      mensagemErro: "Erro ao enviar. Preencha o formulário corretamente."
     }
   },
   methods: {
     onSubmit(values) {
-      console.log(values);
+      this.dadosForm = values
     },
     validateEmail(value) {
       // if the field is empty
       if (!value) {
         return 'Campo obrigatório';
       }
-      // if the field is not a valid email
+      // checa se o email segue o padrão de emails
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(value)) {
         return 'Insira um e-mail válido';
@@ -77,10 +80,23 @@ export default {
       if (!value) {
         return 'Campo obrigatório';
       }
-      // if the field is not a valid email
-      const regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+      // checa se é um cpf ou cnpj
+      const regex = /^([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}|[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}-?[0-9]{2})$/;
       if (!regex.test(value)) {
-        return 'Insira um CPF válido';
+        return 'Insira um CPF ou CNPJ válido';
+      }
+      // All is good
+      return true;
+    },
+    validateTel(value) {
+      // if the field is empty
+      if (!value) {
+        return 'Campo obrigatório';
+      }
+      // checa se o número é celular ou fixo, e se o primeiro dígito de um número de celular com 9 dígitos é 9
+      const regex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})-?(\d{4}))$/;
+      if (!regex.test(value)) {
+        return 'Insira um número de telefone válido';
       }
       // All is good
       return true;
@@ -88,6 +104,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .form-wrapper {
@@ -110,6 +127,6 @@ export default {
 }
 
 .field {
-  margin-left: 10px;
+  margin: 15px;
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
-  <div id="form-wrapper">
+  <div>
 
     <h2>Formulário com validação e input mask.</h2>
     <p>Campos marcados com * são obrigatórios.</p>
 
-    <Form class="form" @submit="onSubmit">
-      <label for="name">Nome*:</label>
-      <Field class="field" name="name" type="text" :rules="validateName" placeholder="Nome Completo"/>
-      <ErrorMessage class="error-msg" name="name" /><br>
+    <Form class="form-wrapper" @submit="onSubmit">
+      <label for="nome">Nome*:</label>
+      <Field class="field" name="nome" type="text" :rules="validateNome" placeholder="Nome Completo"/>
+      <ErrorMessage class="error-msg" name="nome" /><br>
 
       <label for="email">E-mail*:</label>
       <Field class="field" name="email" type="email" :rules="validateEmail" placeholder="email@email.com"/>
@@ -22,10 +22,12 @@
       <ErrorMessage class="error-msg" name="telefone" /><br>
 
       <button class="btn-padrao" @click="onSubmit()">Enviar</button>
+      <div v-if="dadosForm">
+        <div  v-for="(value, key) in dadosForm" :key="value">{{key}}: {{value}}</div>
+      </div>
+      <div v-else class="erro-enviar">{{mensagemErro}}</div>
     </Form>
 
-    <div v-if="dadosForm">{{dadosForm}}</div>
-    <div v-else>{{mensagemErro}}</div>
   </div>
 </template>
 
@@ -62,7 +64,7 @@ export default {
       // All is good
       return true;
     },
-    validateName(value) {
+    validateNome(value) {
       // if the field is empty
       if (!value) {
         return 'Campo obrigatório';
@@ -118,8 +120,13 @@ export default {
 }
 
 .error-msg {
+  font-size: 1rem;
   color: red;
-  text-decoration: underline;
+}
+
+.erro-enviar {
+  font-size: 1.1rem;
+  color: red;
 }
 
 .form {
@@ -128,5 +135,10 @@ export default {
 
 .field {
   margin: 15px;
+  width: 200px;
+  height: 25px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid;
 }
+
 </style>

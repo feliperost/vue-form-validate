@@ -7,7 +7,6 @@
 <script>
 import VeeValidateForm from './components/VeeValidateForm.vue'
 
-
 export default {
   name: 'App',
   components: {

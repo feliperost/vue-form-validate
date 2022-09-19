@@ -23,9 +23,9 @@
 
       <button class="btn-padrao" @click="onSubmit()">Enviar</button>
       <div v-if="dadosForm">
-        <div  v-for="(value, key) in dadosForm" :key="value">{{key}}: {{value}}</div>
+        <div v-for="(value, key) in dadosForm" :key="value">{{key}}: {{value}}</div>
       </div>
-      <div v-else class="erro-enviar">{{mensagemErro}}</div>
+      <div v-else class="erro-enviar">Erro ao enviar. Preencha o formulário corretamente.</div>
     </Form>
 
   </div>
@@ -44,7 +44,6 @@ export default {
   data() {
     return {
       dadosForm: {},
-      mensagemErro: "Erro ao enviar. Preencha o formulário corretamente."
     }
   },
   methods: {

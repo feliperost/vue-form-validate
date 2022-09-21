@@ -125,6 +125,10 @@ label {
   color: #42b983;
 }
 
+p {
+  margin: 0;
+}
+
 .form-wrapper {
   display: inline-block;
   justify-content: center;

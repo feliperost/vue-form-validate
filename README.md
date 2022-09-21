@@ -1,5 +1,8 @@
 # vue-form-validate
 
+Projeto para estudar a criação de formulários com Vue.js, utilizando VeeValidate (https://vee-validate.logaretm.com/v4/), e utilizando máscaras para os inputs inseridos pelo usuário com Vue The Mask (https://vuejs-tips.github.io/vue-the-mask/)
+
+
 ## Project setup
 ```
 npm install

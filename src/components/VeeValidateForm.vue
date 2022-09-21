@@ -2,31 +2,43 @@
   <div>
 
     <h2>Formulário com validação e input mask.</h2>
-    <p>Campos marcados com * são obrigatórios.</p>
+    <p>Todos os campos são obrigatórios.</p>
 
     <Form class="form-wrapper" @submit="onSubmit">
-      <label for="nome">Nome*:</label>
-      <Field class="field" name="nome" type="text" :rules="validateNome" placeholder="Nome Completo"/>
-      <ErrorMessage class="error-msg" name="nome" /><br>
+      <div class="input-wrapper">
+        <label for="nome">Nome</label>
+        <Field class="field" name="nome" type="text" :rules="validateNome" placeholder="Nome Completo"/>
+        <ErrorMessage class="error-msg" name="nome" /><br>
+      </div>
 
-      <label for="email">E-mail*:</label>
-      <Field class="field" name="email" type="email" :rules="validateEmail" placeholder="email@email.com"/>
-      <ErrorMessage class="error-msg" name="email" /><br>
+      <div class="input-wrapper">
+        <label for="email">E-mail</label>
+        <Field class="field" name="email" type="email" :rules="validateEmail" placeholder="email@email.com"/>
+        <ErrorMessage class="error-msg" name="email" /><br>
+      </div>
     
-      <label for="cpf">CPF ou CNPJ*:</label>
-      <Field class="field" name="cpf" type="text" :rules="validateCPF" v-mask="['###.###.###-##', '##.###.###/####-##']" placeholder="000.000.000-00"/>
-      <ErrorMessage class="error-msg" name="cpf" /><br>
-    
-      <label for="telefone">Telefone*:</label>
-      <Field class="field" name="telefone" type="text" :rules="validateTel" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="(00) 0 0000-0000"/>
-      <ErrorMessage class="error-msg" name="telefone" /><br>
+      <div class="input-wrapper">
+        <label for="cpf">CPF ou CNPJ</label>
+        <Field class="field" name="cpf" type="text" :rules="validateCPF" v-mask="['###.###.###-##', '##.###.###/####-##']" placeholder="000.000.000-00"/>
+        <ErrorMessage class="error-msg" name="cpf" /><br>
+      </div>
+
+      <div class="input-wrapper">
+        <label for="telefone">Telefone</label>
+        <Field class="field" name="telefone" type="text" :rules="validateTel" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="(00) 0 0000-0000"/>
+        <ErrorMessage class="error-msg" name="telefone" /><br>
+      </div>      
 
       <button class="btn-padrao" @click="onSubmit()">Enviar</button>
-      <div v-if="dadosForm">
-        <div v-for="(value, key) in dadosForm" :key="value">{{key}}: {{value}}</div>
-      </div>
-      <div v-else class="erro-enviar">Erro ao enviar. Preencha o formulário corretamente.</div>
     </Form>
+
+    <div class="resultado-form" v-if="dadosForm">
+        <div v-for="(value, key) in dadosForm" :key="value">{{key}}: {{value}}</div>
+    </div>
+    <div v-else class="erro-enviar">
+        <p>Erro ao enviar.</p>
+        <p>Preencha o formulário corretamente.</p>
+    </div>
 
   </div>
 </template>
@@ -108,6 +120,15 @@ export default {
 
 
 <style scoped>
+label {
+  font-weight: bold;
+  color: #42b983;
+}
+
+p {
+  margin: 0;
+}
+
 .form-wrapper {
   display: inline-block;
   justify-content: center;
@@ -116,6 +137,7 @@ export default {
   padding: 7px;
   border-radius: 2px;
   background: #fff;
+  margin-top: 20px;
 }
 
 .error-msg {
@@ -126,18 +148,32 @@ export default {
 .erro-enviar {
   font-size: 1.1rem;
   color: red;
-}
-
-.form {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .field {
-  margin: 15px;
-  width: 200px;
+  margin: 5px;
+  width: 250px;
   height: 25px;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
   border: 1px solid;
+  text-align: center;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.resultado-form {
+  font-size: 1rem;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+::placeholder {
+  text-align: center; 
 }
 
 </style>

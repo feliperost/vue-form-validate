@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <VeeValidateForm/>
+  <div class="nav">
+    <router-link to="/form">Form</router-link> |
+    <router-link to="/users">Cadastros</router-link>
   </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import VeeValidateForm from './components/VeeValidateForm.vue'
 
 export default {
-  name: 'App',
-  components: {
-    VeeValidateForm
-  }
+  name: 'App'
 }
 </script>
 
@@ -41,4 +39,14 @@ export default {
 .btn-padrao:hover {
   background: #5bd39d;
 }
+
+div a {
+  font-weight: bold;
+  color: #2c3e50;
+  text-decoration: none;
+}
+div a.router-link-exact-active {
+  color: #42b983;
+}
+
 </style>

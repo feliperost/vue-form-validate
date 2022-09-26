@@ -21,6 +21,7 @@ import { mapFields } from "@/helpers.js"
 export default {
   name: 'UsersView',
   computed: {
+        // utilizando a funçao mapfields, 'base' é o nome do objeto no store
         ...mapFields({
             fields: ["nome", "email", "cpf", "telefone"],
             base: "cadastro",

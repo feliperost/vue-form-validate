@@ -1,13 +1,14 @@
 import { createStore } from 'vuex'
 
 export default createStore({
-  state () {
-    return {
-      cadastro: {
-        nome: "",
-        email: "",
-        cpf: "",
-        telefone: "",
+    strict: true,
+    state () {
+        return {
+            cadastro: {
+                nome: "",
+                email: "",
+                cpf: "",
+                telefone: "",
         }
     }
   },
@@ -19,5 +20,6 @@ export default createStore({
   actions: {
     criarCadastro(context, payload) {
         context.commit("UPDATE_CADASTRO", { id: payload.email })
-  }}
+    }
+  }
 })

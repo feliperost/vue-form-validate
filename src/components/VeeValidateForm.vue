@@ -61,6 +61,7 @@ export default {
   methods: {
     onSubmit(values) {
       this.dadosForm = values
+      this.$store.commit('UPDATE_CADASTRO', this.dadosForm)
     },
     validateEmail(value) {
       // if the field is empty

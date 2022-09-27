@@ -9,12 +9,14 @@ export default createStore({
                 email: "",
                 cpf: "",
                 telefone: "",
-        }
+            },
+            listaCadastros: []
     }
   },
   mutations: {
     UPDATE_CADASTRO(state, payload) {
-        state.cadastro = Object.assign(state.cadastro, payload)
+        state.listaCadastros.push(payload)
+        // state.cadastro = Object.assign(state.cadastro, payload) <- esse é para um cadastro unico, que pode ser atualizado
     }
   },
   actions: {

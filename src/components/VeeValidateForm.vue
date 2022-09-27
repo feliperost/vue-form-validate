@@ -29,7 +29,7 @@
         <ErrorMessage class="error-msg" name="telefone" /><br>
       </div>      
 
-      <button class="btn-padrao" @click="onSubmit()">Enviar</button>
+      <button class="btn-padrao" @click="onSubmit">Enviar</button>
     </Form>
 
     <div class="resultado-form" v-if="dadosForm">
@@ -55,13 +55,14 @@ export default {
   },
   data() {
     return {
-      dadosForm: {}
+      dadosForm: []
     }
   },
   methods: {
     onSubmit(values) {
       this.dadosForm = values
       this.$store.commit('UPDATE_CADASTRO', this.dadosForm)
+      // this.$store.dispatch('criarCadastro', this.dadosForm)
     },
     validateEmail(value) {
       // if the field is empty

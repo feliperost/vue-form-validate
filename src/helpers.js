@@ -1,4 +1,5 @@
-// funçao para mapear os campos&valores do state, para fazer o get() e set() dos campos que estiverem no seu store
+// funçao para mapear os campos&valores do state, para fazer o get() e set() dos campos que estiverem no store
+// ela serve para garantir a expansao do projeto (no caso de mais campos precisarem ser adicionados)
 
 export function mapFields(options) {
     const object = {}

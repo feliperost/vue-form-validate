@@ -5,6 +5,11 @@ import UsersView from '../views/UsersView.vue'
 
 const routes = [
   {
+    path: '/',
+    name: 'home',
+    component: FormView
+  },
+  {
     path: '/form',
     name: 'form',
     component: FormView

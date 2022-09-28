@@ -50,19 +50,5 @@ div a.router-link-exact-active {
   color: #42b983;
   border-bottom: 2px solid currentColor;
 }
-/* 
-.chevron::before {
-    color: #42b983;
-    border-style: solid;
-    border-width: 0.15em 0.15em 0 0;
-    content: '';
-    display: inline-block;
-    height: 0.45em;
-    left: 0.15em;
-    top: 0.15em;
-    vertical-align: top;
-    width: 0.45em;
-    transform: rotate(135deg);
-} */
 
 </style>

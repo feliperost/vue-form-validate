@@ -2,7 +2,10 @@
   <div class="users">
     
     <p>Teste cadastro</p>
-    <p>objetivos: guardar os cadastros enviados em um estado global ✓ /<br> listar os cadastros enviados ✓ (ainda está duplicado, resolver..) /<br> editar essas informaçoes cadastradas</p>
+    <p>objetivos: guardar os cadastros enviados em um estado global ✓ /<br>
+     listar os cadastros enviados ✓ /<br>
+     editar as informaçoes cadastradas (abrir um input nos campos assim que o user apertar em editar, e aparecer as informações que estão no store)
+     </p>
     <ListaCadastros></ListaCadastros>
   </div>
 </template>

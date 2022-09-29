@@ -32,8 +32,7 @@ export default {
   cursor: pointer;
   padding: 5px 10px;
   font-size: 1rem;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 10px;
   box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
 }
 

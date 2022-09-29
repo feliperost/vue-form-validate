@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import FormView from '../views/FormView.vue'
-import UsersView from '../views/UsersView.vue'
+import CadastrosView from '../views/CadastrosView.vue'
 
 
 const routes = [
@@ -15,9 +15,9 @@ const routes = [
     component: FormView
   },
   {
-    path: '/users',
-    name: 'user',
-    component: UsersView
+    path: '/cadastros',
+    name: 'cadastros',
+    component: CadastrosView
   }
 ]
 

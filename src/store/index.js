@@ -10,18 +10,29 @@ export default createStore({
                 cpf: "",
                 telefone: "",
             },
-            listaCadastros: []
+            listaCadastros: [],
+            modalVisible: false,
+            modalComponent: null
     }
   },
   mutations: {
-    UPDATE_CADASTRO(state, payload) {
+    CREATE_CADASTRO(state, payload) {
       state.listaCadastros.push(payload)
-        // state.cadastro = Object.assign(state.cadastro, payload) 
-        // a linha acima é para um cadastro unico, que pode ser atualizado
+    },
+    UPDATE_CADASTRO(state, payload) {
+      state.cadastro = Object.assign(state.cadastro, payload) 
+      // a linha acima é para um cadastro unico, que pode ser atualizado, vou tentar usar ela aqui para atualizar o registro
     },
     DELETAR_CADASTRO(state, payload) {
       const index = state.listaCadastros.indexOf(payload);
       state.listaCadastros.splice(index, 1);
+    },
+    SHOW_MODAL(state, componentName) {
+      state.modalVisible = true;
+      state.modalComponent = componentName;
+    },
+    HIDE_MODAL(state) {
+      state.modalVisible = false;
     }
   },
   actions: {

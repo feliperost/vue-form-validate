@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
       <h2>Cadastros registrados:</h2>
         <div v-for="(cadastro, index) in this.$store.state.listaCadastros" :key="index">
           <div v-if="cadastro.email != null">
@@ -8,26 +8,32 @@
               <p>Email: {{cadastro.email}}</p>
               <p>CPF ou CNPJ: {{cadastro.cpf}}</p>
               <p>Telefone: {{cadastro.telefone}}</p>     
-              <button @click.prevent="deletarCadastro(cadastro, index)" class="btn-padrao">Remover</button>
               <button @click.prevent="editarCadastro(cadastro, index)" class="btn-padrao">Editar</button>
+              <button @click.prevent="deletarCadastro(cadastro, index)" class="btn-padrao-red">Remover</button>
             </div>
           </div>
         </div>  
+        
+        <ModalEditarCadastro/>
     </div>
 </template>
 
 
 <script>
 import { mapFields } from '@/helpers.js'
+import ModalEditarCadastro from "@/components/ModalEditarCadastro.vue"
 
 export default {
   name: 'UsersView',
+  components: {
+    ModalEditarCadastro
+  },
   computed: {
         // utilizando a funçao mapfields, 'base' é o nome do objeto no store
         ...mapFields({
             fields: ["nome", "email", "cpf", "telefone"],
             base: "listaCadastros",
-            mutation: "UPDATE_CADASTRO"
+            mutation: "CREATE_CADASTRO"
         })
   },
   methods: {
@@ -37,9 +43,11 @@ export default {
     editarCadastro(cadastro, index) {
       console.log(cadastro)
       console.log(index)
-    }
+    },
+
   }
 }
+
 </script>
 
 

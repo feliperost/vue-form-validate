@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <router-link to="/form">Form</router-link> |
-    <router-link to="/users">Cadastros</router-link>
+    <router-link to="/cadastros">Cadastros</router-link>
   </div>
   
   <router-view></router-view>
@@ -38,6 +38,22 @@ export default {
 
 .btn-padrao:hover {
   background: #5bd39d;
+}
+
+.btn-padrao-red {
+  border: none;
+  background: #b94256;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 1rem;
+  margin: 10px;
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-padrao-red:hover {
+  background: #ce4f64;
 }
 
 div a {

@@ -1,6 +1,7 @@
 <template>
   <div>
       <h2>Cadastros registrados:</h2>
+      <p>objetivo atual: pegar as infos do item em questao na array, e atualizá-las </p>
         <div v-for="(cadastro, index) in this.$store.state.listaCadastros" :key="index">
           <div v-if="cadastro.email != null">
             <div class="cadastro">
@@ -8,13 +9,14 @@
               <p>Email: {{cadastro.email}}</p>
               <p>CPF ou CNPJ: {{cadastro.cpf}}</p>
               <p>Telefone: {{cadastro.telefone}}</p>     
-              <button @click.prevent="editarCadastro(cadastro, index)" class="btn-padrao">Editar</button>
+              <button type="button" @click="showModal" class="btn-padrao">Editar</button>
+
+              <ModalEditarCadastro v-show="isModalVisible" @close="closeModal"></ModalEditarCadastro>
+
               <button @click.prevent="deletarCadastro(cadastro, index)" class="btn-padrao-red">Remover</button>
             </div>
           </div>
         </div>  
-        
-        <ModalEditarCadastro/>
     </div>
 </template>
 
@@ -28,6 +30,11 @@ export default {
   components: {
     ModalEditarCadastro
   },
+  data() {
+    return {
+      isModalVisible: false
+    }
+  },
   computed: {
         // utilizando a funçao mapfields, 'base' é o nome do objeto no store
         ...mapFields({
@@ -40,11 +47,16 @@ export default {
     deletarCadastro(cadastro, index) {
       this.$store.commit('DELETAR_CADASTRO', cadastro, index)
     },
-    editarCadastro(cadastro, index) {
-      console.log(cadastro)
-      console.log(index)
+    editarCadastro() {
+      this.$store.commit('SHOW_MODAL', ModalEditarCadastro)
+      console.log(ModalEditarCadastro)
     },
-
+    closeModal() {
+      this.isModalVisible = false
+    },
+    showModal() {
+      this.isModalVisible = true
+    }
   }
 }
 

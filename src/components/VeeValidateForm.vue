@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h2>Formulário com validação e input mask.</h2>
+    <h2>Formulário com regras de validação e input mask.</h2>
     <p>Todos os campos são obrigatórios.</p>
 
     <Form class="form-wrapper" @submit="onSubmit">

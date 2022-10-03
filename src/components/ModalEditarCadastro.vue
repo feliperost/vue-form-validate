@@ -8,40 +8,47 @@
         <button type="button" class="btn-close" @click="close">
           x
         </button>
+        
       </header>
 
-      <section class="modal-body">
+      <section class="modal-body" v-if="this.$store.state.listaCadastros[this.$parent.cadastroIndex]">
         <slot name="body">
-          <Form class="form-wrapper" @submit="onSubmit">
+          <Form class="form-wrapper" @submit="updateCadastro">
             <div class="input-wrapper">
-              <label for="nome">Nome</label>
-              <Field class="field" name="nome" type="text" :rules="validateNome" placeholder="Nome Completo"/>
+              <label for="nome">Nome cadastrado:</label>
+              <span>{{this.$store.state.listaCadastros[this.$parent.cadastroIndex].nome}}</span>
+              <Field class="field" name="nome" type="text" :rules="validateNome" placeholder="Novo nome completo"/>
               <ErrorMessage class="error-msg" name="nome" /><br>
             </div>
 
             <div class="input-wrapper">
-              <label for="email">E-mail</label>
-              <Field class="field" name="email" type="email" :rules="validateEmail" placeholder="email@email.com"/>
+              <label for="email">Email cadastrado:</label>
+              <span>{{this.$store.state.listaCadastros[this.$parent.cadastroIndex].email}}</span>
+              <Field class="field" name="email" type="email" :rules="validateEmail" placeholder="Novo email"/>
               <ErrorMessage class="error-msg" name="email" /><br>
             </div>
           
             <div class="input-wrapper">
-              <label for="cpf">CPF ou CNPJ</label>
-              <Field class="field" name="cpf" type="text" :rules="validateCPF" v-mask="['###.###.###-##', '##.###.###/####-##']" placeholder="000.000.000-00"/>
+              <label for="cpf">CPF/CNPJ cadastrado:</label>
+              <span>{{this.$store.state.listaCadastros[this.$parent.cadastroIndex].cpf}}</span>
+              <Field class="field" name="cpf" type="text" :rules="validateCPF" v-mask="['###.###.###-##', '##.###.###/####-##']" placeholder="Novo CPF/CNPJ"/>
               <ErrorMessage class="error-msg" name="cpf" /><br>
             </div>
 
             <div class="input-wrapper">
-              <label for="telefone">Telefone</label>
-              <Field class="field" name="telefone" type="text" :rules="validateTel" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="(00) 0 0000-0000"/>
+              <label for="telefone">Telefone cadastrado:</label>
+              <span>{{this.$store.state.listaCadastros[this.$parent.cadastroIndex].telefone}}</span>
+              <Field class="field" name="telefone" type="text" :rules="validateTel" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Novo telefone"/>
               <ErrorMessage class="error-msg" name="telefone" /><br>
             </div>      
 
-            <button class="btn-padrao" @click="updateCadastro">Atualizar</button>
+            <button class="btn-padrao" @click.prevent="updateCadastro">Atualizar</button>
           </Form>          
         </slot>
-       </section>
+      </section>
 
+      <!-- essa linha \/ consegue acessar os dados de acordo com o index, mas está mto grande e feio
+      {{this.$store.state.listaCadastros[this.$parent.cadastroIndex].nome}} -->
       
         <button type="button" class="btn-padrao-red" @click="close">
           Cancelar
@@ -63,6 +70,7 @@ export default {
     Field,
     ErrorMessage,
   },
+  props: ['cadastroIndex'],
   data() {
     return {
       showModal: false,
@@ -70,11 +78,11 @@ export default {
     }
   },
   computed: {
-        ...mapFields({
-            fields: ["nome", "email", "cpf", "telefone"],
-            base: "listaCadastros",
-            mutation: "UPDATE_CADASTRO"
-        })
+    ...mapFields({
+        fields: ["nome", "email", "cpf", "telefone"],
+        base: "listaCadastros",
+        mutation: "UPDATE_CADASTRO"
+    })
   },
   methods: {
     close() {
@@ -163,8 +171,7 @@ export default {
   flex-direction: column;
 }
 
-.modal-header,
-.modal-footer {
+.modal-header {
   padding: 15px;
   display: flex;
 }
@@ -174,12 +181,6 @@ export default {
   border-bottom: 1px solid #eeeeee;
   color: #42b983;
   justify-content: space-between;
-}
-
-.modal-footer {
-  border-top: 1px solid #eeeeee;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 
 .modal-body {

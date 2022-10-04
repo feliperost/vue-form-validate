@@ -2,7 +2,7 @@
   <div>
       <h2>Cadastros registrados:</h2>
       <p>objetivo atual: botão submeter as informações do modal atualizar as informações do item em questão</p>
-      <p>problemas: o usuário ainda precisa digitar todas as informações novamente, mesmo que só queira alterar 1 campo</p>
+      <p></p>
         <div v-for="(cadastro, index) in this.$store.state.listaCadastros" :key="index">
           <div v-if="cadastro.email != null">
             <div class="cadastro">
@@ -23,7 +23,6 @@
 
 
 <script>
-import { mapFields } from '@/helpers.js'
 import ModalEditarCadastro from "@/components/ModalEditarCadastro.vue"
 
 export default {
@@ -36,14 +35,6 @@ export default {
       isModalVisible: false,
       cadastroIndex: Number
     }
-  },
-  computed: {
-    // utilizando a funçao mapfields, 'base' é o nome do objeto no store
-    ...mapFields({
-        fields: ["nome", "email", "cpf", "telefone"],
-        base: "listaCadastros",
-        mutation: "CREATE_CADASTRO"
-    })
   },
   methods: {
     deletarCadastro(cadastro, index) {
@@ -68,12 +59,13 @@ export default {
 
 <style scoped>
 .cadastro {
-    display: inline-block;
-    justify-content: center;
-    border: 1px solid;
-    box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
-    padding: 7px;
-    border-radius: 2px;
-    background: #fff;
+  display: inline-block;
+  justify-content: center;
+  border: 1px solid;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
+  padding: 7px;
+  border-radius: 2px;
+  background: #fff;
+  margin-top: 10px;
 }
 </style>

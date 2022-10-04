@@ -14,7 +14,32 @@
       <section class="modal-body" v-if="this.$store.state.listaCadastros[this.$parent.cadastroIndex]">
         <slot name="body">
           <Form class="form-wrapper" @submit="updateCadastro">
+
             <div class="input-wrapper">
+              <label for="nome">Nome cadastrado:</label>
+              <input class="field" type="text" v-model="nome" :rules="validateNome" name="nome">
+              <ErrorMessage class="error-msg" name="nome" /><br>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="nome">Email cadastrado:</label>
+              <input class="field" type="email" v-model="email" :rules="validateEmail" name="email">
+              <ErrorMessage class="error-msg" name="email" /><br>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="nome">CPF/CNPJ cadastrado:</label>
+              <input class="field" type="text" v-model="cpf" :rules="validateCPF" name="cpf">
+              <ErrorMessage class="error-msg" name="cpf" /><br>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="nome">Telefone cadastrado:</label>
+              <input class="field" type="text" v-model="telefone" :rules="validateTel" name="cpf">
+              <ErrorMessage class="error-msg" name="telefone" /><br>
+            </div>
+
+            <!-- <div class="input-wrapper">
               <label for="nome">Nome cadastrado:</label>
               <span>{{this.$store.state.listaCadastros[this.$parent.cadastroIndex].nome}}</span>
               <Field class="field" name="nome" type="text" :rules="validateNome" placeholder="Novo nome completo"/>
@@ -40,15 +65,12 @@
               <span>{{this.$store.state.listaCadastros[this.$parent.cadastroIndex].telefone}}</span>
               <Field class="field" name="telefone" type="text" :rules="validateTel" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Novo telefone"/>
               <ErrorMessage class="error-msg" name="telefone" /><br>
-            </div>      
+            </div>       -->
 
-            <button class="btn-padrao" @click.prevent="updateCadastro">Atualizar</button>
+            <button type="button" class="btn-padrao" @click="updateCadastro">Atualizar</button>
           </Form>          
         </slot>
       </section>
-
-      <!-- essa linha \/ consegue acessar os dados de acordo com o index, mas está mto grande e feio
-      {{this.$store.state.listaCadastros[this.$parent.cadastroIndex].nome}} -->
       
         <button type="button" class="btn-padrao-red" @click="close">
           Cancelar
@@ -60,7 +82,7 @@
 
 
 <script>
-import { mapFields } from '@/helpers.js'
+// import { mapFields } from '@/helpers.js'
 import { Form, Field, ErrorMessage } from 'vee-validate';
 
 export default {
@@ -74,23 +96,57 @@ export default {
   data() {
     return {
       showModal: false,
-      dadosCadastro: []
+      dadosFormAtualizar: [],
     }
   },
   computed: {
-    ...mapFields({
-        fields: ["nome", "email", "cpf", "telefone"],
-        base: "listaCadastros",
-        mutation: "UPDATE_CADASTRO"
-    })
+    // usando essas computed properties para aparecer o valor dinamicamente no campo de input... estudando se é a melhor opção...
+    nome: {
+      get(){
+        return this.$store.state.listaCadastros[this.$parent.cadastroIndex].nome
+      },
+      set(value){
+        this.$store.commit('UPDATE_CADASTRO', { nome: value })
+      }},
+    email: {
+      get(){
+        return this.$store.state.listaCadastros[this.$parent.cadastroIndex].email
+      },
+      set(value){
+        this.$store.commit('UPDATE_CADASTRO', { email: value })
+      }},
+    cpf: {
+      get(){
+        return this.$store.state.listaCadastros[this.$parent.cadastroIndex].cpf
+      },
+      set(value){
+        this.$store.commit('UPDATE_CADASTRO', { cpf: value })
+      }},
+    telefone: {
+      get(){
+        return this.$store.state.listaCadastros[this.$parent.cadastroIndex].telefone
+      },
+      set(value){
+        this.$store.commit('UPDATE_CADASTRO', { telefone: value })
+      }},
   },
+  //   computed: {
+  //   // utilizando a funçao mapfields, 'base' é o nome do objeto no store
+  //   ...mapFields({
+  //       fields: ["nome", "email", "cpf", "telefone"],
+  //       base: "listaCadastros",
+  //       mutation: "UPDATE_CADASTRO"
+  //   })
+  // },
   methods: {
     close() {
       this.$emit('close');
     },
     updateCadastro(values) {
-      this.dadosCadastro = values
+      // this.dadosFormAtualizar = values
+      // this.$parent.cadastroIndex = index
       this.$store.commit('UPDATE_CADASTRO', values)
+      console.log(values)
     },
     validateEmail(value) {
       // if the field is empty

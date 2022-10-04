@@ -20,7 +20,10 @@ export default createStore({
       state.listaCadastros.push(payload)
     },
     UPDATE_CADASTRO(state, payload) {
-      state.cadastro = Object.assign(state.cadastro, payload) 
+      const index = state.listaCadastros.indexOf(payload)
+      
+      state.listaCadastros[index] = Object.assign({}, state.listaCadastros[index], payload) 
+      // state.cadastro = Object.assign(state.cadastro, payload) 
       // a linha acima é para um cadastro unico, que pode ser atualizado, vou tentar usar ela aqui para atualizar o registro
     },
     DELETAR_CADASTRO(state, payload) {

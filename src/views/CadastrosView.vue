@@ -2,7 +2,7 @@
   <div>
       <h2>Cadastros registrados:</h2>
       <p>objetivo atual: botão submeter as informações do modal atualizar as informações do item em questão</p>
-      <p></p>
+      <p>tentando mostrar as informações atuais no input, e quando houver alteração, alterar no state...</p>
         <div v-for="(cadastro, index) in this.$store.state.listaCadastros" :key="index">
           <div v-if="cadastro.email != null">
             <div class="cadastro">
@@ -39,9 +39,6 @@ export default {
   methods: {
     deletarCadastro(cadastro, index) {
       this.$store.commit('DELETAR_CADASTRO', cadastro, index)
-    },
-    editarCadastro() {
-      this.$store.commit('SHOW_MODAL', ModalEditarCadastro)
     },
     closeModal() {
       this.isModalVisible = false

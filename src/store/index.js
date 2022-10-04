@@ -11,8 +11,6 @@ export default createStore({
                 telefone: "",
             },
             listaCadastros: [],
-            modalVisible: false,
-            modalComponent: null
     }
   },
   mutations: {
@@ -30,20 +28,8 @@ export default createStore({
       const index = state.listaCadastros.indexOf(payload);
       state.listaCadastros.splice(index, 1);
     },
-    SHOW_MODAL(state, componentName) {
-      state.modalVisible = true;
-      state.modalComponent = componentName;
-    },
-    HIDE_MODAL(state) {
-      state.modalVisible = false;
-    }
   },
   actions: {
-    criarCadastro(context, payload) {
-      context.commit("UPDATE_CADASTRO", { id: payload.email })
-    },
-    deletarCadastro(context, payload) {
-      context.commit("DELETAR_CADASTRO", payload)
-    }
+    
   }
 })

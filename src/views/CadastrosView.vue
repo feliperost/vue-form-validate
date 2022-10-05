@@ -3,6 +3,7 @@
       <h2>Cadastros registrados:</h2>
       <p>objetivo atual: botão submeter as informações do modal atualizar as informações do item em questão</p>
       <p>tentando mostrar as informações atuais no input, e quando houver alteração, alterar no state...</p>
+      <p>ideia 2: focar em uma criação de login, e estando dentro do login, vc consegue editar as infos (como no curso da origamid)</p>
         <div v-for="(cadastro, index) in this.$store.state.listaCadastros" :key="index">
           <div v-if="cadastro.email != null">
             <div class="cadastro">
@@ -10,7 +11,7 @@
               <p>Email: {{cadastro.email}}</p>
               <p>CPF ou CNPJ: {{cadastro.cpf}}</p>
               <p>Telefone: {{cadastro.telefone}}</p>     
-              <button type="button" @click="showModal(), storeIndex(index)" class="btn-padrao">Editar</button>
+              <button type="button" @click="showModal(index)" class="btn-padrao">Editar</button>
 
               <ModalEditarCadastro v-show="isModalVisible" @close="closeModal"></ModalEditarCadastro>
 
@@ -43,12 +44,10 @@ export default {
     closeModal() {
       this.isModalVisible = false
     },
-    showModal() {
+    showModal(index) {
       this.isModalVisible = true
-    },
-    storeIndex(index) {
       this.cadastroIndex = index
-    }
+    },
   }
 }
 </script>

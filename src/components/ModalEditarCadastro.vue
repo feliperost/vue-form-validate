@@ -44,7 +44,7 @@
               <ErrorMessage class="error-msg" name="telefone" /><br>
             </div>      
 
-            <button type="button" class="btn-padrao" @click="updateCadastro">Atualizar</button>
+            <button type="button" class="btn-padrao" @click="updateCadastro(); close()">Atualizar</button>
           </Form>          
         </slot>
       </section>
@@ -59,7 +59,6 @@
 
 
 <script>
-// import { mapFields } from '@/helpers.js'
 import { Form, Field, ErrorMessage } from 'vee-validate';
 
 export default {
@@ -77,7 +76,6 @@ export default {
     }
   },
   computed: {
-    // usando essas computed properties para aparecer o valor dinamicamente no campo de input... estudando se é a melhor opção...
     nome: {
       get(){
         return this.$store.state.listaCadastros[this.$parent.cadastroIndex].nome
@@ -107,14 +105,6 @@ export default {
         this.$store.commit('UPDATE_CADASTRO', { telefone: value })
       }},
   },
-  //   computed: {
-  //   // utilizando a funçao mapfields, 'base' é o nome do objeto no store
-  //   ...mapFields({
-  //       fields: ["nome", "email", "cpf", "telefone"],
-  //       base: "listaCadastros",
-  //       mutation: "UPDATE_CADASTRO"
-  //   })
-  // },
   methods: {
     close() {
       this.$emit('close');
@@ -122,7 +112,6 @@ export default {
     updateCadastro(values) {
       this.dadosFormAtualizar = values
       this.$store.commit('UPDATE_CADASTRO', values)
-      console.log(values)
     },
     validateEmail(value) {
       // if the field is empty
@@ -178,7 +167,6 @@ export default {
     },
   }
 }
-
 </script>
 
 

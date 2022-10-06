@@ -47,6 +47,7 @@ export default {
     showModal(index) {
       this.isModalVisible = true
       this.cadastroIndex = index
+      this.$store.commit('PEGAR_INDEX_CADASTRO', index)
     },
   }
 }

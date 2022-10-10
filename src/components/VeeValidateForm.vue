@@ -33,7 +33,9 @@
     </Form>
 
     <div class="resultado-form" v-if="dadosForm">
-        <div v-for="(value, key) in dadosForm" :key="value">{{key}}: {{value}}</div>
+        <div v-for="(value, key) in dadosForm" :key="value">
+          {{key}}: {{value}}
+        </div>
     </div>
     <div v-else class="erro-enviar">
         <p>Erro ao enviar.</p>
@@ -61,7 +63,9 @@ export default {
   methods: {
     onSubmit(values) {
       this.dadosForm = values
-      this.$store.commit('CREATE_CADASTRO', values)
+      if (Object.prototype.hasOwnProperty.call(values, "nome")) {
+        this.$store.commit('CREATE_CADASTRO', values)
+      }
     },
     validateEmail(value) {
       // if the field is empty

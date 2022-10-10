@@ -1,9 +1,9 @@
 <template>
   <div>
       <h2>Cadastros registrados:</h2>
-      <p>objetivo atual: botão submeter as informações do modal atualizar as informações do item em questão</p>
-      <p>tentando mostrar as informações atuais no input, e quando houver alteração, alterar no state...</p>
-      <p>ideia 2: focar em uma criação de login, e estando dentro do login, vc consegue editar as infos (como no curso da origamid)</p>
+      <p>objetivo 1: edição só funcionar se estiver dentro das regras, esperar para submeter a alteração no state com o botão (como no form)</p>
+      <p>objetivo 2: refatorar para composition api, p/ treinar script setup</p>
+      <p>ideia paralela: focar em uma criação de login, e estando dentro do login, vc consegue editar as infos (como no curso da origamid)</p>
         <div v-for="(cadastro, index) in this.$store.state.listaCadastros" :key="index">
           <div v-if="cadastro.email != null">
             <div class="cadastro">

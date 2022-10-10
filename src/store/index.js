@@ -35,6 +35,10 @@ export default createStore({
     }
   },
   actions: {
-    
+    UPDATE_CADASTRO(state, payload) {
+      const index = state.indexCadastroEditando
+      
+      state.listaCadastros[index] = Object.assign({}, state.listaCadastros[index], payload) 
+    }
   }
 })

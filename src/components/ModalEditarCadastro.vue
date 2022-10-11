@@ -22,25 +22,25 @@
 
             <div class="input-wrapper">
               <label for="nome">Nome cadastrado:</label>
-              <Field class="field" v-model="nome" name="nome" type="text" :rules="validateNome" placeholder="Novo nome completo"/>
+              <Field class="field" v-model="nome" name="nome" type="text" :rules="validateNome" placeholder="Nome Completo"/>
               <ErrorMessage class="error-msg" name="nome" /><br>
             </div>
 
             <div class="input-wrapper">
               <label for="email">Email cadastrado:</label>
-              <Field class="field" v-model="email" name="email" type="email" :rules="validateEmail" placeholder="Novo email"/>
+              <Field class="field" v-model="email" name="email" type="email" :rules="validateEmail" placeholder="email@email.com"/>
               <ErrorMessage class="error-msg" name="email" /><br>
             </div>
           
             <div class="input-wrapper">
               <label for="cpf">CPF/CNPJ cadastrado:</label>
-              <Field class="field" v-model="cpf" name="cpf" type="text" :rules="validateCPF" v-mask="['###.###.###-##', '##.###.###/####-##']" placeholder="Novo CPF/CNPJ"/>
+              <Field class="field" v-model="cpf" name="cpf" type="text" :rules="validateCPF" v-mask="['###.###.###-##', '##.###.###/####-##']" placeholder="000.000.000-00"/>
               <ErrorMessage class="error-msg" name="cpf" /><br>
             </div>
 
             <div class="input-wrapper">
               <label for="telefone">Telefone cadastrado:</label>
-              <Field class="field" v-model="telefone" name="telefone" type="text" :rules="validateTel" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="Novo telefone"/>
+              <Field class="field" v-model="telefone" name="telefone" type="text" :rules="validateTel" v-mask="['(##) ####-####', '(##) #####-####']" placeholder="(00) 0 0000-0000"/>
               <ErrorMessage class="error-msg" name="telefone" /><br>
             </div>      
 
@@ -81,7 +81,7 @@ export default {
         return this.$store.state.listaCadastros[this.$parent.cadastroIndex].nome
       },
       set(value){
-        this.$store.commit('UPDATE_CADASTRO', { nome: value })
+        this.$store.dispatch('updateCadastro', { nome: value })
       }},
     email: {
       get(){
@@ -110,8 +110,8 @@ export default {
       this.$emit('close');
     },
     updateCadastro(values) {
-      this.dadosFormAtualizar = values
-      this.$store.commit('UPDATE_CADASTRO', values)
+      // this.$store.commit('UPDATE_CADASTRO', values)
+      this.$store.dispatch('updateCadastro', values)
     },
     validateEmail(value) {
       // if the field is empty

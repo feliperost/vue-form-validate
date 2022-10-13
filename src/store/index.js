@@ -38,5 +38,9 @@ export default createStore({
     updateCadastro(context, payload) {
       context.commit("UPDATE_CADASTRO", payload)
     },
+    UPDATE_CADASTRO_TESTE : async (context,payload) => {
+      let { data } = await payload
+      context.commit('SET_TODO', data)
+    }
   }
 })

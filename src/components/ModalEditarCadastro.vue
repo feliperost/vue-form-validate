@@ -110,8 +110,10 @@ export default {
       this.$emit('close');
     },
     updateCadastro(values) {
+      // console.log(values)
       // this.$store.commit('UPDATE_CADASTRO', values)
       this.$store.dispatch('updateCadastro', values)
+      // UPDATE_CADASTRO_TESTE
     },
     validateEmail(value) {
       // if the field is empty

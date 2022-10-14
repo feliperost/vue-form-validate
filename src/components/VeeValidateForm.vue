@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <h2>Formulário com regras de validação e input mask.</h2>
     <p>Todos os campos são obrigatórios.</p>
 
@@ -41,33 +40,26 @@
         <p>Erro ao enviar.</p>
         <p>Preencha o formulário corretamente.</p>
     </div>
-
   </div>
 </template>
 
 
-<script>
+<script setup>
 import { Form, Field, ErrorMessage } from 'vee-validate';
+import { ref } from 'vue';
+import { useStore } from 'vuex'
 
-export default {
-  components: {
-    Form,
-    Field,
-    ErrorMessage,
-  },
-  data() {
-    return {
-      dadosForm: []
-    }
-  },
-  methods: {
-    onSubmit(values) {
-      this.dadosForm = values
+  const store = useStore()
+  
+  const dadosForm = ref([])
+  
+  function onSubmit(values) {
+      // this.dadosForm = values
       if (Object.prototype.hasOwnProperty.call(values, "nome")) {
-        this.$store.commit('CREATE_CADASTRO', values)
+        store.commit('CREATE_CADASTRO', values)
       }
-    },
-    validateEmail(value) {
+    }
+  function validateEmail(value) {
       // if the field is empty
       if (!value) {
         return 'Campo obrigatório';
@@ -79,8 +71,8 @@ export default {
       }
       // All is good
       return true;
-    },
-    validateNome(value) {
+    }
+  function validateNome(value) {
       // if the field is empty
       if (!value) {
         return 'Campo obrigatório';
@@ -92,8 +84,8 @@ export default {
       }
       // All is good
       return true;
-    },
-    validateCPF(value) {
+    }
+  function validateCPF(value) {
       // if the field is empty
       if (!value) {
         return 'Campo obrigatório';
@@ -105,8 +97,8 @@ export default {
       }
       // All is good
       return true;
-    },
-    validateTel(value) {
+    }
+  function validateTel(value) {
       // if the field is empty
       if (!value) {
         return 'Campo obrigatório';
@@ -118,9 +110,7 @@ export default {
       }
       // All is good
       return true;
-    },
-  },
-};
+    }
 </script>
 
 

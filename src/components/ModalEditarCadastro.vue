@@ -14,12 +14,6 @@
         <slot name="body">
           <Form class="form-wrapper" @submit="updateCadastro">
 
-            <!-- <div class="input-wrapper"> TESTE COM INPUT NORMAL
-              <label for="nome">Nome cadastrado:</label>
-              <input class="field" type="text" v-model="nome" :rules="validateNome" name="nome">
-              <ErrorMessage class="error-msg" name="nome" /><br>
-            </div> -->
-
             <div class="input-wrapper">
               <label for="nome">Nome cadastrado:</label>
               <Field class="field" v-model="nome" name="nome" type="text" :rules="validateNome" placeholder="Nome Completo"/>

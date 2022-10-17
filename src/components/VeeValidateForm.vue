@@ -31,6 +31,8 @@
       <button class="btn-padrao" @click="onSubmit">Enviar</button>
     </Form>
 
+    <!-- fazer um watcher (enviando..., enviado com sucesso!) https://vuejs.org/guide/essentials/watchers.html#basic-example -->
+
     <div class="resultado-form" v-if="dadosForm">
         <div v-for="(value, key) in dadosForm" :key="value">
           {{key}}: {{value}}
@@ -54,9 +56,9 @@ import { useStore } from 'vuex'
   const dadosForm = ref([])
   
   function onSubmit(values) {
-      // this.dadosForm = values
       if (Object.prototype.hasOwnProperty.call(values, "nome")) {
         store.commit('CREATE_CADASTRO', values)
+        dadosForm.value = values
       }
     }
   function validateEmail(value) {

@@ -51,68 +51,69 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 import { ref } from 'vue';
 import { useStore } from 'vuex'
 
-  const store = useStore()
-  
-  const dadosForm = ref([])
-  
-  function onSubmit(values) {
-      if (Object.prototype.hasOwnProperty.call(values, "nome")) {
-        store.commit('CREATE_CADASTRO', values)
-        dadosForm.value = values
-      }
+const store = useStore()
+
+const dadosForm = ref([])
+
+function onSubmit(values) {
+    if (Object.prototype.hasOwnProperty.call(values, "nome")) {
+      store.commit('CREATE_CADASTRO', values)
+      dadosForm.value = values
     }
-  function validateEmail(value) {
-      // if the field is empty
-      if (!value) {
-        return 'Campo obrigatório';
-      }
-      // checa se o email segue o padrão de emails
-      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-      if (!regex.test(value)) {
-        return 'Insira um e-mail válido';
-      }
-      // All is good
-      return true;
+  }
+
+function validateEmail(value) {
+    // if the field is empty
+    if (!value) {
+      return 'Campo obrigatório';
     }
-  function validateNome(value) {
-      // if the field is empty
-      if (!value) {
-        return 'Campo obrigatório';
-      }
-      // if the field is not a valid name
-      const regex = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/i;
-      if (!regex.test(value)) {
-        return 'Insira um nome válido';
-      }
-      // All is good
-      return true;
+    // checa se o email segue o padrão de emails
+    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (!regex.test(value)) {
+      return 'Insira um e-mail válido';
     }
-  function validateCPF(value) {
-      // if the field is empty
-      if (!value) {
-        return 'Campo obrigatório';
-      }
-      // checa se é um cpf ou cnpj
-      const regex = /^([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}|[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}-?[0-9]{2})$/;
-      if (!regex.test(value)) {
-        return 'Insira um CPF ou CNPJ válido';
-      }
-      // All is good
-      return true;
+    // All is good
+    return true;
+  }
+function validateNome(value) {
+    // if the field is empty
+    if (!value) {
+      return 'Campo obrigatório';
     }
-  function validateTel(value) {
-      // if the field is empty
-      if (!value) {
-        return 'Campo obrigatório';
-      }
-      // checa se o número é celular ou fixo, e se o primeiro dígito de um número de celular com 9 dígitos é 9
-      const regex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})-?(\d{4}))$/;
-      if (!regex.test(value)) {
-        return 'Insira um número de telefone válido';
-      }
-      // All is good
-      return true;
+    // if the field is not a valid name
+    const regex = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/i;
+    if (!regex.test(value)) {
+      return 'Insira um nome válido';
     }
+    // All is good
+    return true;
+  }
+function validateCPF(value) {
+    // if the field is empty
+    if (!value) {
+      return 'Campo obrigatório';
+    }
+    // checa se é um cpf ou cnpj
+    const regex = /^([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}|[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}-?[0-9]{2})$/;
+    if (!regex.test(value)) {
+      return 'Insira um CPF ou CNPJ válido';
+    }
+    // All is good
+    return true;
+  }
+function validateTel(value) {
+    // if the field is empty
+    if (!value) {
+      return 'Campo obrigatório';
+    }
+    // checa se o número é celular ou fixo, e se o primeiro dígito de um número de celular com 9 dígitos é 9
+    const regex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})-?(\d{4}))$/;
+    if (!regex.test(value)) {
+      return 'Insira um número de telefone válido';
+    }
+    // All is good
+    return true;
+  }
 </script>
 
 

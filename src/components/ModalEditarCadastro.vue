@@ -54,7 +54,6 @@
 
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate';
-
 export default {
   name: 'ModalEditarCadastro',
   components: {
@@ -178,7 +177,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 .modal {
   background: #FFFFFF;
   box-shadow: 2px 2px 20px 1px;
@@ -186,24 +184,20 @@ export default {
   display: flex;
   flex-direction: column;
 }
-
 .modal-header {
   padding: 15px;
   display: flex;
 }
-
 .modal-header {
   position: relative;
   border-bottom: 1px solid #eeeeee;
   color: #42b983;
   justify-content: space-between;
 }
-
 .modal-body {
   position: relative;
   padding: 20px 10px;
 }
-
 .btn-close {
   position: absolute;
   top: 0;
@@ -216,7 +210,6 @@ export default {
   color: #b94256;
   background: transparent;
 }
-
 .btn-green {
   color: white;
   background: #4AAE9B;
@@ -228,11 +221,9 @@ label {
   font-weight: bold;
   color: #42b983;
 }
-
 p {
   margin: 0;
 }
-
 .form-wrapper {
   display: inline-block;
   justify-content: center;
@@ -243,18 +234,15 @@ p {
   background: #fff;
   margin-top: 20px;
 }
-
 .error-msg {
   font-size: 1rem;
   color: red;
 }
-
 .erro-enviar {
   font-size: 1.1rem;
   color: red;
   margin-top: 10px;
 }
-
 .field {
   margin: 5px;
   width: 250px;
@@ -263,19 +251,16 @@ p {
   border: 1px solid;
   text-align: center;
 }
-
 .input-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .resultado-form {
   font-size: 1rem;
   padding: 10px;
   margin-top: 20px;
 }
-
 ::placeholder {
   text-align: center; 
 }

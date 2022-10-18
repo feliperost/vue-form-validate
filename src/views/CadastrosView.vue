@@ -25,7 +25,6 @@
 
 <script>
 import ModalEditarCadastro from "@/components/ModalEditarCadastro.vue"
-
 export default {
   name: 'UsersView',
   components: {

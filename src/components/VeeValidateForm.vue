@@ -52,7 +52,6 @@ import { ref } from 'vue';
 import { useStore } from 'vuex'
 
 const store = useStore()
-
 const dadosForm = ref([])
 
 function onSubmit(values) {

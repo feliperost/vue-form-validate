@@ -1,30 +1,27 @@
 <template>
-    <p>desenvolvendo esse desafio: https://github.com/petlove/vagas/tree/master/frontend</p>
+    <div>  
+        <p>feito: acessando a api e está retornando os dados do cep digitado (por hora no console)</p>
+        <p>a fazer: exibir os resultados</p>
+        <Form class="form-wrapper" @submit="fetchCep">
+            <div class="input-wrapper">
+                <Field class="field" name="cep" type="text" :rules="validateCEP" v-mask="['#####-###']" placeholder="00000-000"/>
+                <ErrorMessage class="error-msg" name="cep"/><br>
+            </div>
+            <button class="btn-padrao" @click="fetchCep">Buscar CEP</button>
+        </Form>
 
-    <Form class="form-wrapper" @submit="fetchCep">
-        <div class="input-wrapper">
-            <Field class="field" name="cep" type="text" :rules="validateCEP" v-mask="['#####-###']" placeholder="00000-000"/>
-            <ErrorMessage class="error-msg" name="cep"/><br>
+        <!-- <div class="resultado-cep" v-if="cepPesquisado.value">
+            <div v-for="(value, key) in cepPesquisado.value" :key="value">
+            {{key}}: {{value}}
+            </div>
         </div>
-        <button class="btn-padrao" @click="fetchCep">Buscar CEP</button>
-    </Form>
-
-    <!-- <div class="input-wrapper">
-        <input class="field" v-model="cep" name="cep" type="text" :rules="validateCEP" v-mask="['#####-###']" placeholder="00000-000"/>
-        <button class="btn-padrao" @click="fetchCep">Buscar CEP</button>
-        <ErrorMessage class="error-msg" name="cep"/><br>
-    </div> -->
-
-    <!-- <div class="resultado">
-        <ul>
-            <li>CEP: {{cepPesquisado.cep}}</li>
-            <li>Estado: {{cepPesquisado.uf}}</li>
-            <li>Cidade: {{cepPesquisado.localidade}}</li>
-            <li>Endereço: {{cepPesquisado.logradouro}}</li>
-        </ul>
-    </div> -->
-
+        <div v-else class="erro-enviar">
+            <p>Erro ao enviar.</p>
+            <p>Preencha o formulário corretamente.</p>
+        </div> -->
+    </div>
 </template>
+
 
 <script setup>
 import { Form, Field, ErrorMessage } from 'vee-validate';
@@ -44,18 +41,35 @@ function validateCEP(value) {
     return true;
 }
 
-const cepPesquisado = ref([])
+let cepPesquisado = ref()
 
-async function fetchCep(value){
-    cepPesquisado.value = value
-    console.log(cepPesquisado)
-    // let response = await fetch(`https://viacep.com.br/ws/${cep}/json`);
-    // let json = await response.json();
-    // cep.value = await json;
+async function fetchCep(value) {
+    cepPesquisado.value = value;
+
+    // isso aqui resolveu o problema abaixo (da busca estar enviando o cep + undefined)
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    // checar no console se o cep foi (estava enviando undefined E o cep)
+    console.log(cepPesquisado.value.cep);
+
+    try {
+        // Realize a chamada à API do ViaCEP
+        let response = await fetch(`https://viacep.com.br/ws/${cepPesquisado.value.cep}/json`);
+        let json = await response.json();
+        
+        // Atribua o resultado da API a cepPesquisado.value
+        cepPesquisado.value = json;
+
+        console.log(cepPesquisado.value);
+        return cepPesquisado.value;
+    } catch (error) {
+        console.error('Erro ao buscar CEP:', error);
+        return null; // ou trate o erro de outra forma, conforme necessário
+    }
 }
 </script>
 
 <style scoped>
 
-
 </style>
+

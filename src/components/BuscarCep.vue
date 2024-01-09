@@ -1,7 +1,6 @@
 <template>
     <div>  
-        <p>feito: acessando a api e está retornando os dados do cep digitado (por hora no console)</p>
-        <p>a fazer: exibir os resultados</p>
+        <h2>Pesquise um CEP</h2>
         <Form class="form-wrapper" @submit="fetchCep">
             <div class="input-wrapper">
                 <Field class="field" name="cep" type="text" :rules="validateCEP" v-mask="['#####-###']" placeholder="00000-000"/>
@@ -10,15 +9,19 @@
             <button class="btn-padrao" @click="fetchCep">Buscar CEP</button>
         </Form>
 
-        <!-- <div class="resultado-cep" v-if="cepPesquisado.value">
-            <div v-for="(value, key) in cepPesquisado.value" :key="value">
-            {{key}}: {{value}}
+        <div v-if="cepPesquisado">
+            <h2>Dados do CEP pesquisado:</h2>
+            <div class="resultado-form">
+                <div v-for="(value, key) in cepPesquisado" :key="value">
+                    <span class="resultado-titulo">{{key}}:</span> {{value}}
+                </div>
             </div>
         </div>
         <div v-else class="erro-enviar">
             <p>Erro ao enviar.</p>
             <p>Preencha o formulário corretamente.</p>
-        </div> -->
+        </div>
+
     </div>
 </template>
 
@@ -53,23 +56,43 @@ async function fetchCep(value) {
     console.log(cepPesquisado.value.cep);
 
     try {
-        // Realize a chamada à API do ViaCEP
+        // fazer a chamada à API 
         let response = await fetch(`https://viacep.com.br/ws/${cepPesquisado.value.cep}/json`);
         let json = await response.json();
         
-        // Atribua o resultado da API a cepPesquisado.value
         cepPesquisado.value = json;
 
         console.log(cepPesquisado.value);
         return cepPesquisado.value;
     } catch (error) {
         console.error('Erro ao buscar CEP:', error);
-        return null; // ou trate o erro de outra forma, conforme necessário
+        return null; 
     }
 }
 </script>
 
 <style scoped>
 
+.resultado-form {
+  display: inline-block;
+  justify-content: center;
+  border: 1px solid;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
+  padding: 10px;
+  border-radius: 2px;
+  background: #fff;
+  margin-top: 10px;
+}
+
+.resultado-titulo {
+    font-weight: bold;
+    text-transform: uppercase;   
+}
+
+.erro-enviar {
+  font-size: 1.1rem;
+  color: red;
+  margin-top: 10px;
+}
 </style>
 

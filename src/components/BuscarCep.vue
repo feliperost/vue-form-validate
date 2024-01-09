@@ -1,7 +1,9 @@
 <template>
     <div>  
+        <p>fazer: estilizar melhor o resultado</p>
+        <p>ideia a fazer: um botão no final do resultado que copie o endereço para a clipboard</p>
         <h2>Pesquise um CEP</h2>
-        <Form class="form-wrapper" @submit="fetchCep">
+        <Form class="form-wrapper" @submit="fetchCep" :validateOnMount="false">
             <div class="input-wrapper">
                 <Field class="field" name="cep" type="text" :rules="validateCEP" v-mask="['#####-###']" placeholder="00000-000"/>
                 <ErrorMessage class="error-msg" name="cep"/><br>
@@ -13,8 +15,10 @@
             <h2>Dados do CEP pesquisado:</h2>
             <div class="resultado-form">
                 <div v-for="(value, key) in cepPesquisado" :key="value">
-                    <span class="resultado-titulo">{{key}}:</span> {{value}}
+                    <span class="resultado-key">{{key}}:</span>
+                    <span class="resultado-value">{{value}}</span>
                 </div>
+                <button class="btn-padrao">Copiar para a área de transferência</button>
             </div>
         </div>
         <div v-else class="erro-enviar">
@@ -82,11 +86,16 @@ async function fetchCep(value) {
   border-radius: 2px;
   background: #fff;
   margin-top: 10px;
+
 }
 
-.resultado-titulo {
+.resultado-key {
     font-weight: bold;
     text-transform: uppercase;   
+}
+
+.resultado-value {
+    font-weight: medium;
 }
 
 .erro-enviar {
@@ -94,5 +103,6 @@ async function fetchCep(value) {
   color: red;
   margin-top: 10px;
 }
+
 </style>
 
